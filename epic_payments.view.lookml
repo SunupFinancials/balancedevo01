@@ -102,11 +102,10 @@
   - dimension: payment_agent
     sql: ${TABLE}.PaymentAgent
 
-  - dimension: payment_amount
-    sql: ${TABLE}.PaymentAmount
 
   - dimension: payment_id
     type: int
+    primary_key: true
     sql: ${TABLE}.Payment_Id
 
   - dimension: payment_status
@@ -138,4 +137,90 @@
   - measure: count
     type: count
     drill_fields: []
+    
+  - measure: payment_amount
+    type: sum
+    sql: ${TABLE}.PaymentAmount
+  
+  - measure: origination_payment_amount
+    type: sum
+    sql: ${TABLE}.PaymentAmount
+    filters:
+      is_origination: 1
+      
+  - measure: origination_count
+    type: count
+    filters:
+      is_origination: 1
+      
+  - measure: origination_average
+    type: number
+    sql: (${origination_payment_amount}*1.00) / NULLIF((${origination_count}*1.00),0)
+      
+  - measure: payments_submitted
+    type: sum
+    sql: ${TABLE}.PaymentAmount
+    filters:
+      is_origination: 0
+      payment_status: Checked,Rejected
+      payment_type: -Cash,-Loan Transfer
+      
+  - measure: payments_rejected
+    type: sum
+    sql: ${TABLE}.PaymentAmount
+    filters:
+      is_origination: 0
+      payment_status: Rejected
+      payment_type: -Cash,-Loan Transfer
+      
+  - measure: payment_ret_percent
+    label: 'Ret %'
+    type: number
+    value_format: '#.0\%'
+    sql: 100.00 * ((${payments_rejected}*1.00) / NULLIF((${payments_submitted}*1.00),0))
 
+    
+  - measure: payment1_total_count
+    label: 'Total 1 P'
+    type: count
+    filters:
+      loan_payment_number: 1
+      is_debit: 1
+      payment_status: Checked,Rejected
+      payment_type: -Cash,-Loan Transfer
+    
+  - measure: payment2_total_count
+    type: count
+    filters:
+      loan_payment_number: 2
+      is_debit: 1
+      payment_status: Checked,Rejected
+      payment_type: -Cash,-Loan Transfer
+        
+  - measure: payment1_rejected_count
+    type: count
+    filters:
+      loan_payment_number: 1
+      is_debit: 1
+      payment_status: Rejected
+      payment_type: -Cash,-Loan Transfer
+    
+  - measure: payment2_rejected_count
+    type: count
+    filters:
+      loan_payment_number: 2
+      is_debit: 1
+      payment_status: Rejected
+      payment_type: -Cash,-Loan Transfer
+      
+  - measure: payment1_percent
+    label: 'PD 1'
+    type: number
+    value_format: '#.0\%'
+    sql: 100.00 * ((${payment1_rejected_count}*1.00) / NULLIF((${payment1_total_count}*1.00),0))
+      
+  - measure: payment2_percent
+    label: 'PD 2'
+    type: number
+    value_format: '#.0\%'
+    sql: 100.00 *((${payment2_rejected_count}*1.00) / NULLIF((${payment2_total_count}*1.00),0))
