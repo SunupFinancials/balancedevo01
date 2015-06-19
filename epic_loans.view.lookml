@@ -268,5 +268,5 @@
       
   - measure: m_approved_amount_wo_fees
     type: number
-    sql: ${m_approved_amount_tx}+${m_approved_amount_NotTX}
+    sql: ${m_approved_amount_tx}+${m_approved_amount_nottx}
     label: 'Approved Amount w/o Fees'
