@@ -234,4 +234,20 @@
   - measure: count
     type: count
     drill_fields: [store_name, lead_provider_name]
+    
+  - measure: rejected_count
+    type: count
+    sql: ${reject_reason}
+    
+  - measure: m_approved_amount
+    type: sum
+    sql: ${TABLE}.ApprovedAmount
 
+  - measure: m_requested_amount
+    type: sum
+    sql: ${TABLE}.RequestedAmount
+    
+  - measure: average_approval_amount
+    type: number
+    sql: ${m_approved_amount}/${count}
+    decimals: 2
