@@ -251,3 +251,22 @@
     type: number
     sql: ${m_approved_amount}/${count}
     decimals: 2
+    
+  - measure: m_approved_amount_tx
+    type: sum
+    sql: ${TABLE}.ApprovedAmount/2.1
+    decimals: 2
+    filters:
+      state: tx
+    
+  - measure: m_approved_amount_NotTX
+    type: sum
+    sql: ${TABLE}.ApprovedAmount
+    decimals: 2
+    filters:
+      state: -tx
+      
+  - measure: m_approved_amount_wo_fees
+    type: number
+    sql: ${m_approved_amount_NotTX}+${m_approved_amount_NotTX}
+    label: 'Approved Amount w/o Fees'
