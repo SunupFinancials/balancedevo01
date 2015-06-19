@@ -259,7 +259,7 @@
     filters:
       state: TX
     
-  - measure: m_approved_amount_NotTX
+  - measure: m_approved_amount_nottx
     type: sum
     sql: ${TABLE}.ApprovedAmount
     decimals: 2
