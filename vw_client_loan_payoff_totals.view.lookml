@@ -36,6 +36,9 @@
   - dimension: display_number
     sql: ${TABLE}.DisplayNumber
 
+  - dimension: full_name
+    sql: ${TABLE}.FullName
+
   - dimension: loan_id
     type: int
     sql: ${TABLE}.LoanId
@@ -82,5 +85,5 @@
 
   - measure: count
     type: count
-    drill_fields: []
+    drill_fields: [full_name]
 
