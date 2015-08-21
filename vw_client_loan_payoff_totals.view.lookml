@@ -75,10 +75,6 @@
   - dimension: state
     sql: ${TABLE}.State
 
-  - dimension: todays_payoff_total
-    type: number
-    sql: ${TABLE}.TodaysPayoffTotal
-
   - dimension: total_interest_todate
     type: number
     sql: ${TABLE}.TotalInterestTODATE
@@ -87,3 +83,7 @@
     type: count
     drill_fields: [full_name]
 
+  - measure: date_payoff_amount
+    type: number
+    sql: ${TABLE}.todays_payoff_total
+    decimals: 2
