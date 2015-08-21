@@ -218,6 +218,11 @@
   - dimension: state
     sql: ${TABLE}.State
 
+  - dimension: state_group
+    sql: (case when ${TABLE}.State = 'CA' then 'CA'
+               when ${TABLE}.State = 'TX' then 'TX'
+               else 'Other' end)
+               
   - dimension: store_name
     sql: ${TABLE}.StoreName
 
