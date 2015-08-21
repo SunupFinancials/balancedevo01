@@ -77,4 +77,3 @@
 
 - explore: vw_reporting_business30_day_months
 - explore: vw_reporting_business7_day_weeks
-- explore: vw_client_loan_payoff_totals
