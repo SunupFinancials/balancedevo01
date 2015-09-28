@@ -49,6 +49,7 @@
     sql: ${TABLE}.OutstandingPrinciple
 
   - dimension: outstanding_total
+    type: number
     sql: ${TABLE}.OutstandingTotal
 
   - dimension: paid_off_finance_fee
