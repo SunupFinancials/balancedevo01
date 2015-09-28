@@ -63,9 +63,11 @@
     sql: ${TABLE}.NSFLateFeesTODATE
 
   - dimension: outstanding_principle
+    type: number
     sql: ${TABLE}.OutstandingPrinciple
 
   - dimension: outstanding_total
+    type: number
     sql: ${TABLE}.OutstandingTotal
 
   - dimension: principle_todate
