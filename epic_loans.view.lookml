@@ -278,10 +278,10 @@
     
   - measure: min_apr
     type: min
-    sql: ${TABLE}.annual_percent_rate
+    sql: ${TABLE}.AnnualPercentRate
     label: 'Min APR'
     
   - measure: max_apr
     type: max
-    sql: ${TABLE}.annual_percent_rate
+    sql: ${TABLE}.AnnualPercentRate
     label: 'Max APR'
