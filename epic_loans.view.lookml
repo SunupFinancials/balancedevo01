@@ -275,3 +275,13 @@
     type: number
     sql: ${m_approved_amount_tx}+${m_approved_amount_nottx}
     label: 'Approved Amount w/o Fees'
+    
+  - measure: min_apr
+    type: min
+    sql: ${TABLE}.annual_percent_rate
+    label: 'Min APR'
+    
+  - measure: max_apr
+    type: max
+    sql: ${TABLE}.annual_percent_rate
+    label: 'Max APR'
