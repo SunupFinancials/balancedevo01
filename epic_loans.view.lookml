@@ -10,6 +10,7 @@
 
   - dimension: annual_percent_rate
     type: number
+    decimals: 3
     sql: ${TABLE}.AnnualPercentRate
 
   - dimension: approved_amount
